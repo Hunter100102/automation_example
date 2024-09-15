@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Automated Invoice Generator</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #add8e6; /* Light blue background */
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+            position: relative; /* Necessary for dropdown positioning */
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background: #00aaff;
+        }
+
+        /* Dropdown menu styles */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        /* Show dropdown on hover */
+        li:hover .dropdown-content {
+            display: block;
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        form {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+
+        .item {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-top: 10px;
+        }
+
+        #add-item {
+            margin-top: 15px;
+        }
+
+        #result {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="kinetic-techs.html">Kinetic Techs</a></li>
+               <!-- <li>
+                    <a href="#">Examples</a>
+                    <ul class="dropdown-content">
+                        <li><a href="webpages.html">Web Examples</a></li>
+                        <li><a href="automations.html">Automation Examples</a></li>
+                    </ul>
+                </li>-->
+            </ul>
+        </nav>
+    </header>
+
+    <h1>Automated Invoice Generator</h1>
+    <h2>The PDF will download automatically for your review.</h2>
+    <form id="invoice-form">
+        <h2>Customer Information</h2>
+        <label>Name:</label>
+        <input type="text" name="customerName" required>
+        <label>Email:</label>
+        <input type="email" name="customerEmail" required>
+
+        <h2>Order Details</h2>
+        <div id="items">
+            <div class="item">
+                <label>Item Description:</label>
+                <input type="text" name="itemDescription[]" required>
+                <label>Quantity:</label>
+                <input type="number" name="itemQuantity[]" min="1" value="1" required>
+                <label>Price:</label>
+                <input type="number" name="itemPrice[]" step="0.01" min="0" required>
+            </div>
+        </div>
+        <button type="button" id="add-item">Add Another Item</button>
+        <br><br>
+        <button type="submit">Generate Invoice</button>
+    </form>
+    <div id="result"></div>
+
+    <script>
+        // JavaScript to add more items dynamically
+        document.getElementById('add-item').addEventListener('click', function() {
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'item';
+            itemDiv.innerHTML = `
+                <label>Item Description:</label>
+                <input type="text" name="itemDescription[]" required>
+                <label>Quantity:</label>
+                <input type="number" name="itemQuantity[]" min="1" value="1" required>
+                <label>Price:</label>
+                <input type="number" name="itemPrice[]" step="0.01" min="0" required>
+            `;
+            document.getElementById('items').appendChild(itemDiv);
+        });
+
+        // Handle form submission
+        document.getElementById('invoice-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(this);
+            const data = {};
+
+            formData.forEach((value, key) => {
+                if (key.endsWith('[]')) {
+                    const actualKey = key.slice(0, -2);
+                    if (!data[actualKey]) {
+                        data[actualKey] = [];
+                    }
+                    data[actualKey].push(value);
+                } else {
+                    data[key] = value;
+                }
+            });
+
+            document.getElementById('result').innerText = 'Generating your invoice, please wait...';
+
+            fetch('/api/generate-invoice', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.blob())
+            .then(blob => {
+                // Create a link to download the PDF
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'invoice.pdf';
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                window.URL.revokeObjectURL(url);
+                document.getElementById('result').innerText = 'Invoice generated successfully!';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('result').innerText = 'An error occurred while generating the invoice.';
+            });
+        });
+    </script>
+    <footer>
+        <p>The process of data input can also be automated, reducing errors depending on the data platform you use!</p>
+    </footer>
+</body>
+</html>

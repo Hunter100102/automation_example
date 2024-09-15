@@ -37,6 +37,7 @@
 
         nav ul li {
             margin: 0 15px;
+            position: relative; /* Necessary for dropdown positioning */
         }
 
         nav ul li a {
@@ -50,6 +51,33 @@
 
         nav ul li a:hover {
             background: #00aaff; 
+        }
+
+        /* Dropdown menu styles */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        /* Show dropdown on hover */
+        li:hover .dropdown-content {
+            display: block;
         }
 
         .hero {
@@ -186,6 +214,13 @@
                 <li><a href="blog.html">Blog</a></li>
                 <li><a href="contact.html">Contact Us</a></li>
                 <li><a href="kinetic-techs.html">Kinetic Techs</a></li>
+               <!-- <li>
+                    <a href="#">Examples</a>
+                    <ul class="dropdown-content">
+                        <li><a href="webpages.html">Web Examples</a></li>
+                        <li><a href="automations.html">Automation Examples</a></li>
+                    </ul>
+                </li>-->
             </ul>
         </nav>
     </header>
