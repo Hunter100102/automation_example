@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kinetic Techs | AutomateIT</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background: url('images/homepage-background-4.jpg') no-repeat center center;
+            background-size: cover;
+            min-height: 100vh;
+            color: #333;
+            padding-bottom: 100px; /* Added padding to the bottom */
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background: #00aaff;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            flex-wrap: wrap;
+            padding-bottom: 100px; /* Added bottom padding to the container */
+        }
+
+        .hero, .kinetic-techs-banner {
+            background: rgba(255, 255, 255, 0.75);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            width: 45%;
+            margin: 10px;
+            text-align: center;
+        }
+
+        .hero img {
+            max-width: 300px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin: 0;
+        }
+
+        .hero p {
+            font-size: 1.8rem;
+            margin: 20px 0;
+        }
+
+        .cta {
+            background: #00aaff;
+            color: #fff;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 30px;
+            display: inline-block;
+            font-size: 1rem;
+            transition: background 0.3s ease;
+        }
+
+        .cta:hover {
+            background: #0088cc;
+        }
+
+        .kinetic-techs-banner h2 {
+            color: #333;
+            font-size: 2.5rem;
+            margin: 0;
+        }
+
+        .kinetic-techs-banner p {
+            font-size: 1.2rem;
+            margin: 20px 0;
+        }
+
+        .kinetic-techs-banner ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: left;
+        }
+
+        .kinetic-techs-banner ul li {
+            margin-bottom: 10px;
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            text-align: center;
+            padding: 1rem 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .hero, .kinetic-techs-banner {
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.5rem;
+            }
+
+            .kinetic-techs-banner h2 {
+                font-size: 2rem;
+            }
+
+            .kinetic-techs-banner p {
+                font-size: 1rem;
+            }
+
+            .kinetic-techs-banner ul {
+                padding-left: 20px;
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .kinetic-techs-banner h2 {
+                font-size: 1.5rem;
+            }
+
+            .kinetic-techs-banner p {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="kinetic-techs.html">Kinetic Techs</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <section class="hero">
+            <h1>Welcome to</h1>
+            <img src="images/kinetic-techs-logo.png" alt="Kinetic Techs Logo">
+            <p>At Kinetic Techs, we specialize in low voltage installations, providing a comprehensive range of services designed to meet your technology needs. Our fully equipped vans come stocked with essential supplies.</p>
+            <a href="contact.html" class="cta">Contact Us</a>
+        </section>
+        <section class="kinetic-techs-banner">
+            <h2>Why Choose Us?</h2>
+            <p>Our stocked vans and comprehensive service offerings ensure that we meet all your low voltage installation needs efficiently. Here’s a brief overview of what we offer:</p>          
+            <ul>
+                <li><strong>Network Refreshes</strong> - Upgrades for better performance and reliability.</li>
+                <li><strong>Structured Cabling</strong> - Professional installation of CAT 5e, CAT 6e, and fiber optic cables.</li>
+                <li><strong>Data and Voice Cabling</strong> - Installation for new and existing buildings.</li>
+                <li><strong>Network Design and Consultation</strong> - Tailored solutions to fit your needs.</li>
+                <li><strong>Security Camera Installation</strong> - High-quality CCTV systems for effective monitoring.</li>
+                <li><strong>Wi-Fi Optimization</strong> - Ensuring strong, reliable wireless coverage.</li>
+                <li><strong>Audio/Visual Integration</strong> - Equipment installation for enhanced presentations.</li>
+                <li><strong>System Troubleshooting and Maintenance</strong> - Quick resolution and ongoing support.</li>
+            </ul>
+            <a href="ktservices.html" class="cta">Learn More</a>
+            <p>At Kinetic Techs, we are committed to delivering high-quality low voltage IT installations and support. Our experienced technicians use state-of-the-art equipment and industry best practices to ensure your technology infrastructure is reliable and efficient. <a href="contact.html">Contact us today</a> to discuss your project or to schedule a consultation with one of our experts.</p>
+        </section>
+    </div>
+    <footer>
+        <p>&copy; 2024 AutomateIT. All rights reserved.</p>
+    </footer>
+</body>
+</html>
